@@ -1,6 +1,6 @@
+import { PrimaryButton } from '../components/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet } from 'react-native';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
 
 export default function App() {
   return (
@@ -17,9 +17,13 @@ export default function App() {
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', alignSelf: 'stretch', }} >
         <Text style={styles.learnMoreText}>LEARN MORE</Text>
-        <Pressable onPress={() => { console.log('TAKE THE QUIZ') }} style={styles.button}>
-          <Text style={styles.buttonText}>TAKE THE QUIZ</Text>
-        </Pressable>
+        <PrimaryButton
+          type='primary'
+          onPress={() => { console.log('TAKE THE QUIZ') }}
+          children={
+            <Text>TAKE THE QUIZ</Text>
+          }
+        />
       </View>
     </View>
   );
