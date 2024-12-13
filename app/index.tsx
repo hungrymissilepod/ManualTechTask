@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
@@ -16,7 +17,9 @@ export default function App() {
       </View>
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', alignSelf: 'stretch', }} >
-        <Text style={styles.learnMoreText}>LEARN MORE</Text>
+        <Link href={'/learnMore'} style={styles.learnMoreText}>
+          <Text>LEARN MORE</Text>
+        </Link>
         <PrimaryButton
           type='primary'
           onPress={() => { console.log('TAKE THE QUIZ') }}
@@ -69,8 +72,8 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   learnMoreText: {
-    paddingBottom: 20,
     textDecorationLine: 'underline',
+    paddingBottom: 20,
     fontWeight: 400,
     fontSize: 16,
     lineHeight: 30,
