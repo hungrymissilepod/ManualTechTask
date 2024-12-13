@@ -3,6 +3,20 @@ import { PrimaryButton } from '../components/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
 
+/*
+
+TODOS:
+- Organise LearnMore view and components and styles
+- Organise App view and components and styles
+- Set up themeing and use throughout the app (colors, text styles, etc)
+- Start on Quiz section
+- App name
+- App icon
+- Launch icon
+- Delete example app code
+- Delete unused assets
+*/
+
 export default function App() {
   return (
     <View style={styles.container}>

@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar, Text, View, SafeAreaView, FlatList, useWindowDimensions, ViewToken } from "react-native";
+import { StyleSheet, StatusBar, Text, Image, View, SafeAreaView, FlatList, useWindowDimensions, ViewToken } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
 import { Button, TouchableHighlight, Animated } from "react-native";
@@ -6,20 +6,27 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import DataJson from '../../data.json';
 import React, { useState, useRef } from 'react';
 import Paginator from '@/components/LearnMore/Paginator';
+import { LearnMoreSection } from "@/components/LearnMore/LearnMoreSection";
 
 export default function LearnMoreView() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const dataRef = useRef(null);
+  const dataRef = useRef<FlatList>(null);
   const viewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0) {
-      console.log(`setCurrentIndex: ${viewableItems[0].index}`);
       setCurrentIndex(viewableItems[0].index ?? 0);
     }
-
   }).current;
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+  const scrollTo = () => {
+    if (currentIndex < DataJson.data.length - 1) {
+      dataRef.current?.scrollToIndex({ index: currentIndex + 1 });
+    } else {
+      router.back();
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -32,12 +39,12 @@ export default function LearnMoreView() {
           headerLeft: () => <CloseButton />
         }}
       />
-      <View style={{ flex: 1, }}></View>
+      <View style={{ flex: 1 }}></View>
 
-      <View style={{ justifyContent: 'center', alignItems: 'flex-end', flex: 2 }}>
+      <View style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
         <FlatList
           data={DataJson.data}
-          renderItem={(item) => <LearnMoreSection key={item.item.id} data={item.item} />}
+          renderItem={({ item }) => <LearnMoreSection key={item.id} data={item} />}
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
@@ -52,14 +59,13 @@ export default function LearnMoreView() {
         />
       </View>
 
-
-      <View style={{ flex: 1, justifyContent: 'flex-end', }}>
+      <View style={{ paddingHorizontal: 18, justifyContent: 'flex-end', flex: 1 }}>
         <Paginator data={DataJson.data} scrollX={scrollX} currentIndex={currentIndex} />
         <PrimaryButton
           type='secondary'
-          onPress={() => { console.log('TAKE THE QUIZ') }}
+          onPress={scrollTo}
           children={
-            <Text>NEXT</Text>
+            <Text>{currentIndex == 0 ? 'NEXT' : 'DONE'}</Text>
           }
         />
       </View>
@@ -69,28 +75,7 @@ export default function LearnMoreView() {
 }
 
 
-const LearnMoreSection = (data: LearnMoreSectionProps) => {
-  const { width } = useWindowDimensions();
-  return (
-    <View style={[{ width }]}>
-      <Text>section: {data.data.id}</Text>
-      <Text>{data.data.title}</Text>
-      <Text>{data.data.header}</Text>
-    </View>
-  );
-}
 
-export type Data = {
-  id: number,
-  assetID: string,
-  title: string,
-  header: string,
-  subtitle: string
-}
-
-export type LearnMoreSectionProps = {
-  data: Data,
-}
 
 // TODO: move to Component folder
 const CloseButton = (props: any) => {
@@ -106,7 +91,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ECF0EB',
-    paddingHorizontal: 18,
+    // paddingHorizontal: 18,
   },
   touchable: {
     borderRadius: 100,
