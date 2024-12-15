@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { PrimaryButton } from '../components/PrimaryButton/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, StyleSheet } from 'react-native';
@@ -9,12 +9,15 @@ import { Sizes } from '@/constants/Sizes';
 /*
 TODOS:
 - Test to make sure 404 page works
-- Start on Quiz section
+- Use localisation for strings rather than harcoding them?
+- Create quiz layout and quiz[id] screen. Navigate to new screen for each question
 - App name
 - App icon
 - Launch icon
 - Delete example app code
 - Delete unused assets
+- Write unit tests
+- Write UI tests
 */
 
 export default function App() {
@@ -36,7 +39,7 @@ export default function App() {
         </Link>
         <PrimaryButton
           type='secondary'
-          onPress={() => { console.log('TAKE THE QUIZ') }}
+          onPress={() => { router.push('/quiz') }}
           children={
             <Text>TAKE THE QUIZ</Text>
           }

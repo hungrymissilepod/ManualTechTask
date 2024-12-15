@@ -2,18 +2,18 @@ import { StyleSheet, StatusBar, Text, View, FlatList, ViewToken } from "react-na
 import { router, Stack } from "expo-router";
 import { Animated } from "react-native";
 import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
-import LearnMoreSections from '../../learnMoreSections.json';
+import LearnMoreSections from '../../learnMore.json';
 import React, { useState, useRef } from 'react';
 import Paginator from '@/components/LearnMore/Paginator';
 import { LearnMoreSection } from "@/components/LearnMore/LearnMoreSection";
-import { CloseButton } from "@/components/HeaderIcons/CloseIcon";
+import { CloseIcon } from "@/components/HeaderIcons/CloseIcon";
 import { Colors } from '../../constants/Colors';
 import { Sizes } from "@/constants/Sizes";
 
 export default function LearnMoreView() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const dataRef = useRef<FlatList>(null);
+  const scrollRef = useRef<FlatList>(null);
 
   // When user drags carousel, update [currentIndex]
   const viewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
@@ -27,7 +27,7 @@ export default function LearnMoreView() {
   // Scroll to carousel page when user taps NEXT button
   const scrollTo = () => {
     if (currentIndex < LearnMoreSections.data.length - 1) {
-      dataRef.current?.scrollToIndex({ index: currentIndex + 1 });
+      scrollRef.current?.scrollToIndex({ index: currentIndex + 1 });
     } else {
       router.back();
     }
@@ -41,7 +41,7 @@ export default function LearnMoreView() {
           headerTitle: 'What can we help with',
           headerTitleAlign: 'center',
           animation: 'ios_from_right',
-          headerLeft: () => <CloseButton />
+          headerLeft: () => <CloseIcon />
         }}
       />
       <View style={styles.container}></View>
@@ -50,17 +50,17 @@ export default function LearnMoreView() {
         <FlatList
           data={LearnMoreSections.data}
           renderItem={({ item }) => <LearnMoreSection key={item.id} learnMore={item} />}
+          keyExtractor={(item) => item.id.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
-          keyExtractor={(item) => item.id.toString()}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
             useNativeDriver: false,
           })}
           onViewableItemsChanged={viewableItemsChanged}
           viewabilityConfig={viewConfig}
           scrollEventThrottle={32}
-          ref={dataRef}
+          ref={scrollRef}
         />
       </View>
 

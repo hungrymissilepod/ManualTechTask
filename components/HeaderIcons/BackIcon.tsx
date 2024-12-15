@@ -4,11 +4,11 @@ import { router } from "expo-router";
 import { TouchableHighlight } from "react-native";
 import React from 'react';
 
-export const CloseIcon = () => {
+export const BackIcon = () => {
   return (
     <TouchableHighlight style={styles.touchable} activeOpacity={0.6} underlayColor="#DDDDDD"
       onPress={() => { router.back() }}>
-      <Ionicons name="close" size={24} color="black" />
+      <Ionicons name="arrow-back-outline" size={24} color="black" />
     </TouchableHighlight>
   );
 }

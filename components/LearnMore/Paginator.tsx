@@ -1,9 +1,8 @@
 import { View, Text, StyleSheet, Animated, useWindowDimensions } from "react-native";
-import { Data } from "./LearnMoreSection";
 import { Colors } from "@/constants/Colors";
+import { LearnMore } from "@/types/LearnMore";
 
-
-export default function Paginator({ data, scrollX, currentIndex }: { data: Data[], scrollX: Animated.Value, currentIndex: number }) {
+export default function Paginator({ data, scrollX, currentIndex }: { data: LearnMore[], scrollX: Animated.Value, currentIndex: number }) {
   const { width } = useWindowDimensions();
   return (
     <View style={{ flexDirection: 'row', height: 64, justifyContent: 'center' }}>
