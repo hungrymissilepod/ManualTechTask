@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Animated, useWindowDimensions } from "react-native";
 import { Data } from "./LearnMoreSection";
+import { Colors } from "@/constants/Colors";
 
 
 export default function Paginator({ data, scrollX, currentIndex }: { data: Data[], scrollX: Animated.Value, currentIndex: number }) {
@@ -10,7 +11,7 @@ export default function Paginator({ data, scrollX, currentIndex }: { data: Data[
         const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
         const color = scrollX.interpolate({
           inputRange,
-          outputRange: ['#A5B79F', '#0B3B3C', '#A5B79F'],
+          outputRange: [Colors.tertiary, Colors.primary, Colors.tertiary],
           extrapolate: 'clamp'
         });
 

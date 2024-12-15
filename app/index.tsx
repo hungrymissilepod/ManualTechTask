@@ -1,14 +1,16 @@
 import { Link } from 'expo-router';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
+import { Text, View, Image, StyleSheet } from 'react-native';
+import { Colors } from '../constants/Colors';
+import { ThemedText } from '@/components/ThemedText';
 
 /*
-
 TODOS:
 - Organise LearnMore view and components and styles
 - Organise App view and components and styles
 - Set up themeing and use throughout the app (colors, text styles, etc)
+- Test to make sure 404 page works
 - Start on Quiz section
 - App name
 - App icon
@@ -19,20 +21,20 @@ TODOS:
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor='#A5B79F' />
-      <View style={{ flex: 1, justifyContent: "center" }} >
+    <View style={styles.background}>
+      <StatusBar backgroundColor={Colors.tertiary} />
+      <View style={[styles.container, { justifyContent: 'center' }]} >
         <Image width={170} height={170} source={require('../assets/images/manual-logo.png')} />
       </View>
 
-      <View style={{ flex: 1 }} >
-        <Text style={styles.heading} >Be good to yourself</Text>
-        <Text style={styles.body}>We’re working around the clock to bring you a holistic approach to your wellness. From top to bottom, inside and out.</Text>
+      <View style={styles.container} >
+        <ThemedText type='display' style={styles.heading} >Be good to yourself</ThemedText>
+        <ThemedText type='body' style={styles.body}>We’re working around the clock to bring you a holistic approach to your wellness. From top to bottom, inside and out.</ThemedText>
       </View>
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', alignSelf: 'stretch', }} >
+      <View style={[styles.container, styles.ctaContainer]} >
         <Link href={'/learnMore'} style={styles.learnMoreText}>
-          <Text>LEARN MORE</Text>
+          <ThemedText type='link'>LEARN MORE</ThemedText>
         </Link>
         <PrimaryButton
           type='primary'
@@ -47,50 +49,29 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#A5B79F',
+    backgroundColor: Colors.tertiary,
     paddingHorizontal: 18,
+  },
+  container: {
+    flex: 1,
+  },
+  ctaContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    alignSelf: 'stretch',
   },
   heading: {
     paddingVertical: 20,
-    fontSize: 70,
-    lineHeight: 80,
-    letterSpacing: -3,
-    fontWeight: 500,
     textAlign: 'center',
-    color: '#0B3B3C'
+    color: Colors.primary,
   },
   body: {
-    fontSize: 19,
-    lineHeight: 30,
-    fontWeight: 400,
     textAlign: 'center',
-    color: '#0B3B3C'
-  },
-  button: {
-    width: '100%',
-    height: 52,
-    justifyContent: 'center',
-    marginBottom: 30,
-    backgroundColor: '#7E0707',
-    borderRadius: 100,
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-  },
-  buttonText: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#fff'
   },
   learnMoreText: {
-    textDecorationLine: 'underline',
     paddingBottom: 20,
-    fontWeight: 400,
-    fontSize: 16,
-    lineHeight: 30,
-    color: '#0B3B3C',
   }
 });

@@ -6,6 +6,7 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import DataJson from '../../data.json';
 import React, { useState, useRef } from 'react';
 import Paginator from '@/components/LearnMore/Paginator';
+import { Colors } from "@/constants/Colors";
 
 
 export const LearnMoreSection = ({ data }: { data: Data }) => {
@@ -68,14 +69,14 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   title: {
-    color: '#0B3B3C',
+    color: Colors.primary,
     fontSize: 28,
     fontWeight: 500,
     lineHeight: 40,
     paddingBottom: 22,
   },
   subtitle: {
-    color: '#0B3B3C',
+    color: Colors.primary,
     fontSize: 19,
     fontWeight: 400,
     lineHeight: 30,
