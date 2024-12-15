@@ -1,15 +1,13 @@
 import { Link } from 'expo-router';
-import { PrimaryButton } from '../components/PrimaryButton';
+import { PrimaryButton } from '../components/PrimaryButton/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { Colors } from '../constants/Colors';
 import { ThemedText } from '@/components/ThemedText';
+import { Sizes } from '@/constants/Sizes';
 
 /*
 TODOS:
-- Organise LearnMore view and components and styles
-- Organise App view and components and styles
-- Set up themeing and use throughout the app (colors, text styles, etc)
 - Test to make sure 404 page works
 - Start on Quiz section
 - App name
@@ -37,7 +35,7 @@ export default function App() {
           <ThemedText type='link'>LEARN MORE</ThemedText>
         </Link>
         <PrimaryButton
-          type='primary'
+          type='secondary'
           onPress={() => { console.log('TAKE THE QUIZ') }}
           children={
             <Text>TAKE THE QUIZ</Text>
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: Colors.tertiary,
-    paddingHorizontal: 18,
+    paddingHorizontal: Sizes.paddingHorizontal,
   },
   container: {
     flex: 1,

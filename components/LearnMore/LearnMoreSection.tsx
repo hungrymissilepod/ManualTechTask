@@ -1,50 +1,45 @@
-import { StyleSheet, StatusBar, Text, Image, View, SafeAreaView, FlatList, useWindowDimensions, ViewToken } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { router, Stack } from "expo-router";
-import { Button, TouchableHighlight, Animated } from "react-native";
-import { PrimaryButton } from "@/components/PrimaryButton";
-import DataJson from '../../data.json';
-import React, { useState, useRef } from 'react';
-import Paginator from '@/components/LearnMore/Paginator';
-import { Colors } from "@/constants/Colors";
+import { StyleSheet, Text, Image, View, useWindowDimensions, ImageSourcePropType } from "react-native";
+import React from 'react';
+import { Sizes } from "@/constants/Sizes";
+import { LearnMore } from "@/types/LearnMore";
+import { ThemedText } from "../ThemedText";
 
+function idToString(id: number) {
+  if (Number.length > 1) return id.toString();
+  return id.toString().padStart(2, '0');
+}
 
-export const LearnMoreSection = ({ data }: { data: Data }) => {
+export const LearnMoreSection = ({ learnMore }: { learnMore: LearnMore }) => {
   const { width } = useWindowDimensions();
+  const img = learnMoreImages[learnMore.id - 1];
+  const idString = idToString(learnMore.id);
 
-  const img = learnMoreImages[data.id - 1];
   return (
-    <View style={[{ paddingHorizontal: 18, width, justifyContent: 'flex-end' }]}>
-      <View style={{ flexDirection: data.id == 1 ? 'row' : 'row-reverse', alignItems: 'center' }}>
+    <View style={[styles.container, { width }]}>
+      <View style={{ flexDirection: learnMore.id % 1 == 0 ? 'row' : 'row-reverse', alignItems: 'center' }}>
         <Image style={styles.image} source={img} />
-        <Text style={styles.idText}>{data.id.toString().padStart(2, '0')}</Text>
+        <Text style={styles.idText}>{idString}</Text>
       </View>
       <View style={{ paddingTop: 40 }}>
-        <Text style={styles.header}>{data.header}</Text>
-        <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.subtitle}>{data.subtitle}</Text>
+        <ThemedText type="label" style={{ paddingBottom: 10 }}>{learnMore.header}</ThemedText>
+        <ThemedText type="title">{learnMore.title}</ThemedText>
+        <ThemedText type="body">{learnMore.subtitle}</ThemedText>
       </View>
-
     </View >
   );
 }
-const learnMoreImages: LearnMoreImage[] = [
+
+// Load image based on [id]
+const learnMoreImages: ImageSourcePropType[] = [
   require('@/assets/images/hairLossInfoIllustration.png'),
   require('@/assets/images/erectileDysfunctionInfoIllustration.png'),
 ]
 
-type LearnMoreImage = {
-  uri: string
-}
-export type Data = {
-  id: number,
-  assetID: string,
-  title: string,
-  header: string,
-  subtitle: string
-}
-
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: Sizes.paddingHorizontal,
+    justifyContent: 'flex-end'
+  },
   image: {
     width: 175,
     height: 200,
@@ -59,26 +54,5 @@ const styles = StyleSheet.create({
     lineHeight: 180,
     letterSpacing: -2,
     textAlign: 'right'
-  },
-  header: {
-    color: '#6D8A83',
-    fontWeight: 700,
-    fontSize: 12,
-    lineHeight: 15,
-    letterSpacing: 1.5,
-    paddingBottom: 10,
-  },
-  title: {
-    color: Colors.primary,
-    fontSize: 28,
-    fontWeight: 500,
-    lineHeight: 40,
-    paddingBottom: 22,
-  },
-  subtitle: {
-    color: Colors.primary,
-    fontSize: 19,
-    fontWeight: 400,
-    lineHeight: 30,
   },
 });

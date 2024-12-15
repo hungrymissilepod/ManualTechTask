@@ -1,17 +1,21 @@
-import { StyleSheet, StatusBar, Text, Image, View, SafeAreaView, FlatList, useWindowDimensions, ViewToken } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, StatusBar, Text, View, FlatList, ViewToken } from "react-native";
 import { router, Stack } from "expo-router";
-import { Button, TouchableHighlight, Animated } from "react-native";
-import { PrimaryButton } from "@/components/PrimaryButton";
-import DataJson from '../../data.json';
+import { Animated } from "react-native";
+import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
+import LearnMoreSections from '../../learnMoreSections.json';
 import React, { useState, useRef } from 'react';
 import Paginator from '@/components/LearnMore/Paginator';
 import { LearnMoreSection } from "@/components/LearnMore/LearnMoreSection";
+import { CloseButton } from "@/components/HeaderIcons/CloseIcon";
+import { Colors } from '../../constants/Colors';
+import { Sizes } from "@/constants/Sizes";
 
 export default function LearnMoreView() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const dataRef = useRef<FlatList>(null);
+
+  // When user drags carousel, update [currentIndex]
   const viewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0) {
       setCurrentIndex(viewableItems[0].index ?? 0);
@@ -20,8 +24,9 @@ export default function LearnMoreView() {
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
+  // Scroll to carousel page when user taps NEXT button
   const scrollTo = () => {
-    if (currentIndex < DataJson.data.length - 1) {
+    if (currentIndex < LearnMoreSections.data.length - 1) {
       dataRef.current?.scrollToIndex({ index: currentIndex + 1 });
     } else {
       router.back();
@@ -30,7 +35,7 @@ export default function LearnMoreView() {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor='#ECF0EB' />
+      <StatusBar backgroundColor={Colors.background} />
       <Stack.Screen
         options={{
           headerTitle: 'What can we help with',
@@ -39,12 +44,12 @@ export default function LearnMoreView() {
           headerLeft: () => <CloseButton />
         }}
       />
-      <View style={{ flex: 1 }}></View>
+      <View style={styles.container}></View>
 
-      <View style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
+      <View style={styles.carouselContainer}>
         <FlatList
-          data={DataJson.data}
-          renderItem={({ item }) => <LearnMoreSection key={item.id} data={item} />}
+          data={LearnMoreSections.data}
+          renderItem={({ item }) => <LearnMoreSection key={item.id} learnMore={item} />}
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
@@ -59,10 +64,10 @@ export default function LearnMoreView() {
         />
       </View>
 
-      <View style={{ paddingHorizontal: 18, justifyContent: 'flex-end', flex: 1 }}>
-        <Paginator data={DataJson.data} scrollX={scrollX} currentIndex={currentIndex} />
+      <View style={[styles.container, { paddingHorizontal: Sizes.paddingHorizontal, justifyContent: 'flex-end' }]}>
+        <Paginator data={LearnMoreSections.data} scrollX={scrollX} currentIndex={currentIndex} />
         <PrimaryButton
-          type='secondary'
+          type='primary'
           onPress={scrollTo}
           children={
             <Text>{currentIndex == 0 ? 'NEXT' : 'DONE'}</Text>
@@ -74,26 +79,14 @@ export default function LearnMoreView() {
   );
 }
 
-
-
-
-// TODO: move to Component folder
-const CloseButton = (props: any) => {
-  return (
-    <TouchableHighlight style={styles.touchable} activeOpacity={0.6} underlayColor="#DDDDDD"
-      onPress={() => { router.back() }}>
-      <Ionicons name="close" size={24} color="black" />
-    </TouchableHighlight>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ECF0EB',
-    // paddingHorizontal: 18,
+    backgroundColor: Colors.background,
   },
-  touchable: {
-    borderRadius: 100,
-  }
+  carouselContainer: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: Colors.background,
+  },
 });

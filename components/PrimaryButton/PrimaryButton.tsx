@@ -1,6 +1,5 @@
 import { Colors } from "@/constants/Colors";
 import { Pressable, Text, StyleSheet } from "react-native";
-import { ThemedText } from "./ThemedText";
 
 export interface PrimaryButtonProps {
   children: React.ReactNode;
@@ -15,9 +14,9 @@ export const PrimaryButton = ({
 }: PrimaryButtonProps) => {
   return (
     <Pressable onPress={onPress} style={[styles.button, styles[type]]}>
-      <ThemedText type="default" style={styles.text}>
+      <Text style={styles.text}>
         {children}
-      </ThemedText>
+      </Text>
     </Pressable>
   );
 };
@@ -40,8 +39,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
   },
   text: {
-    textAlign: 'center',
+    fontSize: 18,
     fontWeight: 500,
+    textAlign: 'center',
     color: '#fff'
   },
 });
