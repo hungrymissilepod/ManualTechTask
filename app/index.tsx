@@ -8,14 +8,11 @@ import { Sizes } from '@/constants/Sizes';
 
 /*
 TODOS:
-- Fix issue where trying to change a previous answer does not navigate to nextx question
-
-- Test to make sure 404 page works
+- Test on Android and iOS (real and simulators), different screen sizes, check safe areas
 - Use localisation for strings rather than harcoding them?
 - App name
 - App icon
 - Launch icon
-- Test on Android and iOS (real and simulators), different screen sizes, check safe areas
 - Delete example app code
 - Delete unused assets
 - Write unit tests

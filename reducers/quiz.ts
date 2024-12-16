@@ -23,13 +23,16 @@ export type UpdateAction = {
 }
 
 export function reducer(state: QuizState, action: QuizAction): QuizState {
+  const questions = [...state.questions];
+
   switch (action.type) {
     case 'ADD':
-      return { ...state, questions: [...state.questions, action.question] };
+      questions.push(action.question);
+      return { ...state, questions: questions };
     case 'UPDATE':
-      const questionToUpdate = state.questions.findIndex((item) => item.question == action.question.question);
-      state.questions[questionToUpdate].selectedAnswer = action.question.selectedAnswer;
-      return { ...state };
+      const indexToReplace = state.questions.findIndex((item) => item.question == action.question.question);
+      questions[indexToReplace] = action.question;
+      return { ...state, questions: questions };
     default:
       return state;
   }

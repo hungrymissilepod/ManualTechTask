@@ -3,6 +3,7 @@ export type QuizQuestion = {
   type: string,
   options: QuizOption[],
   selectedAnswer?: string | boolean;
+  isRejection?: boolean;
 };
 
 export type QuizOption = {

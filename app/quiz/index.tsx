@@ -22,35 +22,45 @@ export default function Quiz() {
   };
 
   const selectAnswer = (index: number) => {
+    /// If user has already answered this question, update
     if (state.questions.length > currentIndex) {
-      dispatch({
-        type: 'UPDATE',
-        question: {
-          ...QuizQuestions.questions[currentIndex],
-          selectedAnswer: QuizQuestions.questions[currentIndex].options[index].value
-        },
-      })
+      updateAnswer(index);
+    } else {
+      addAnswer(index);
+    }
+
+    /// Scroll to next question
+    if (currentIndex < QuizQuestions.questions.length - 1) {
+      scrollTo(currentIndex + 1);
       return;
     }
+
+    /// Navigate to result screen
+    const success: boolean = state.questions.find(item => item.isRejection) === undefined;
+    return router.push({ pathname: '/quiz/result', params: { success: success.toString() } });
+  }
+
+  const addAnswer = (index: number) => {
     dispatch({
       type: 'ADD',
       question: {
         ...QuizQuestions.questions[currentIndex],
-        selectedAnswer: QuizQuestions.questions[currentIndex].options[index].value
+        selectedAnswer: QuizQuestions.questions[currentIndex].options[index].value,
+        isRejection: QuizQuestions.questions[currentIndex].options[index].isRejection,
       },
     });
+  };
 
-    // check if failure
-    if (QuizQuestions.questions[currentIndex].options[index].isRejection) {
-      return router.push({ pathname: '/quiz/result', params: { success: 'false' } });
-    }
-
-    if (currentIndex >= QuizQuestions.questions.length - 1) {
-      return router.push({ pathname: '/quiz/result', params: { success: 'true' } });
-    }
-
-    scrollTo(currentIndex + 1);
-  }
+  const updateAnswer = (index: number) => {
+    dispatch({
+      type: 'UPDATE',
+      question: {
+        ...QuizQuestions.questions[currentIndex],
+        selectedAnswer: QuizQuestions.questions[currentIndex].options[index].value,
+        isRejection: QuizQuestions.questions[currentIndex].options[index].isRejection,
+      },
+    })
+  };
 
   return (
     <View style={styles.background}>
