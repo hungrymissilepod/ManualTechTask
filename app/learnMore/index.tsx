@@ -9,6 +9,7 @@ import { LearnMoreSection } from "@/components/LearnMore/LearnMoreSection";
 import { CloseIcon } from "@/components/HeaderIcons/CloseIcon";
 import { Colors } from '../../constants/Colors';
 import { Sizes } from "@/constants/Sizes";
+import { i18n } from "@/services/i18n";
 
 export default function LearnMoreView() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +39,7 @@ export default function LearnMoreView() {
       <StatusBar backgroundColor={Colors.background} />
       <Stack.Screen
         options={{
-          headerTitle: 'What can we help with',
+          headerTitle: i18n.t('learnMoreHeading'),
           headerTitleAlign: 'center',
           animation: 'ios_from_right',
           headerLeft: () => <CloseIcon />
@@ -70,7 +71,7 @@ export default function LearnMoreView() {
           type='primary'
           onPress={scrollTo}
           children={
-            <Text>{currentIndex == 0 ? 'NEXT' : 'DONE'}</Text>
+            <Text>{currentIndex == 0 ? i18n.t('buttonNext') : i18n.t('buttonDone')}</Text>
           }
         />
       </View>

@@ -6,6 +6,7 @@ import { View, StyleSheet, StatusBar, FlatList, SafeAreaView } from 'react-nativ
 import QuizQuestions from '../../quiz.json';
 import { useReducer, useRef, useState } from 'react';
 import { reducer } from '@/reducers/quiz';
+import { i18n } from '@/services/i18n';
 
 export default function Quiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -67,7 +68,7 @@ export default function Quiz() {
       <StatusBar backgroundColor={Colors.background} />
       <Stack.Screen
         options={{
-          headerTitle: 'Quiz',
+          headerTitle: i18n.t('quizHeading'),
           headerTitleAlign: 'center',
           animation: 'ios_from_right',
           headerLeft: () => <BackIcon onPress={() => { scrollTo(currentIndex - 1) }} />

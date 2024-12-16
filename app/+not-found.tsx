@@ -1,5 +1,6 @@
 
 import { ThemedText } from '@/components/ThemedText';
+import { i18n } from '@/services/i18n';
 import { Link, Stack } from 'expo-router';
 import { StatusBar, StyleSheet, View } from 'react-native';
 
@@ -9,9 +10,9 @@ export default function NotFoundScreen() {
       <Stack.Screen options={{ title: 'Oops!' }} />
       <StatusBar backgroundColor='white' />
       <View style={styles.container}>
-        <ThemedText type="title">This screen doesn't exist.</ThemedText>
+        <ThemedText type="title">{i18n.t('404Title')}</ThemedText>
         <Link href="/" style={styles.link}>
-          <ThemedText type="link">Go to home screen!</ThemedText>
+          <ThemedText type="link">{i18n.t('404Body')}</ThemedText>
         </Link>
       </View>
     </>

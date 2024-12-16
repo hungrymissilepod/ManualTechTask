@@ -5,13 +5,9 @@ import { Text, View, Image, StyleSheet } from 'react-native';
 import { Colors } from '../constants/Colors';
 import { ThemedText } from '@/components/ThemedText';
 import { Sizes } from '@/constants/Sizes';
+import { setupI18nConfig, i18n } from '@/services/i18n';
 
-/*
-TODOS:
-- Use localisation for strings rather than harcoding them?
-- Write unit tests
-- Write UI tests
-*/
+setupI18nConfig();
 
 export default function App() {
   return (
@@ -22,19 +18,19 @@ export default function App() {
       </View>
 
       <View style={styles.container} >
-        <ThemedText type='display' style={styles.heading} >Be good to yourself</ThemedText>
-        <ThemedText type='body' style={styles.body}>We’re working around the clock to bring you a holistic approach to your wellness. From top to bottom, inside and out.</ThemedText>
+        <ThemedText type='display' style={styles.heading}>{i18n.t('landingTitle')}</ThemedText>
+        <ThemedText type='body' style={styles.body}>{i18n.t('landingBody')}</ThemedText>
       </View>
 
       <View style={[styles.container, styles.ctaContainer]} >
         <Link href={'/learnMore'} style={styles.learnMoreText}>
-          <ThemedText type='link'>LEARN MORE</ThemedText>
+          <ThemedText type='link'>{i18n.t('landingLearnMore')}</ThemedText>
         </Link>
         <PrimaryButton
           type='secondary'
           onPress={() => { router.push('/quiz') }}
           children={
-            <Text>TAKE THE QUIZ</Text>
+            <Text>{i18n.t('landingCTA')}</Text>
           }
         />
       </View>

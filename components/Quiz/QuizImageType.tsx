@@ -5,6 +5,7 @@ import { QuizImage } from "./QuizImage";
 import { Sizes } from "@/constants/Sizes";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 import { indexOfSelectedAnswer } from '@/reducers/quiz';
+import { i18n } from "@/services/i18n";
 
 export default function QuizImageType({ question, onCTAPressed }: { question: QuizQuestion, onCTAPressed: CallableFunction }) {
   const { width } = useWindowDimensions();
@@ -33,7 +34,7 @@ export default function QuizImageType({ question, onCTAPressed }: { question: Qu
       <View style={[styles.button, currentIndex == -1 ? styles.disabledButton : null, { width, justifyContent: 'flex-end' }]}>
         <PrimaryButton
           type='primary'
-          children={<Text>NEXT</Text>}
+          children={<Text>{i18n.t('buttonNext')}</Text>}
           onPress={() => {
             if (currentIndex != -1) {
               onCTAPressed(currentIndex);
