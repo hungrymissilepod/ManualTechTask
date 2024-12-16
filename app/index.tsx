@@ -8,7 +8,6 @@ import { Sizes } from '@/constants/Sizes';
 
 /*
 TODOS:
-- Test on Android and iOS (real and simulators), different screen sizes, check safe areas
 - Use localisation for strings rather than harcoding them?
 - App name
 - App icon
