@@ -1,6 +1,6 @@
-import { StyleSheet, View, TouchableHighlight } from "react-native";
-import { ThemedText } from "@/app-example/components/ThemedText";
+import { StyleSheet, TouchableHighlight } from "react-native";
 import { Colors } from "@/constants/Colors";
+import { ThemedText } from "@/components/ThemedText";
 
 export const QuizText = ({ value, selected, onPress }: { value: string, selected: boolean, onPress: CallableFunction }) => {
   return <TouchableHighlight

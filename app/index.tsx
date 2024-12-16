@@ -9,11 +9,6 @@ import { Sizes } from '@/constants/Sizes';
 /*
 TODOS:
 - Use localisation for strings rather than harcoding them?
-- App name
-- App icon
-- Launch icon
-- Delete example app code
-- Delete unused assets
 - Write unit tests
 - Write UI tests
 */

@@ -1,5 +1,4 @@
 import { Colors } from '@/constants/Colors';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { Text, type TextProps, StyleSheet } from 'react-native';
 
 
@@ -16,12 +15,9 @@ export function ThemedText({
   type = 'body',
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
-
   return (
     <Text
       style={[
-        { color },
         type === 'display' ? styles.display : undefined,
         type === 'title' ? styles.title : undefined,
         type === 'body' ? styles.body : undefined,
