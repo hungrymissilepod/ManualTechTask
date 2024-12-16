@@ -13,7 +13,6 @@ export default function QuizImageType({ question, onCTAPressed }: { question: Qu
     setCurrentIndex(index);
   };
 
-
   return (
     <View style={{ width, flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
       <FlatList

@@ -8,14 +8,14 @@ import { Sizes } from '@/constants/Sizes';
 
 /*
 TODOS:
-- Create QuizSuccess screen
-- Create QuizFailure screen
-- Use reducers to track users progress during the quiz
+- Fix issue where trying to change a previous answer does not navigate to nextx question
+
 - Test to make sure 404 page works
 - Use localisation for strings rather than harcoding them?
 - App name
 - App icon
 - Launch icon
+- Test on Android and iOS (real and simulators), different screen sizes, check safe areas
 - Delete example app code
 - Delete unused assets
 - Write unit tests

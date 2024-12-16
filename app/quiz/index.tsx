@@ -42,12 +42,14 @@ export default function Quiz() {
 
     // check if failure
     if (QuizQuestions.questions[currentIndex].options[index].isRejection) {
-      console.log('failed the quiz!');
+      return router.push({ pathname: '/quiz/result', params: { success: 'false' } });
     }
 
-    if (index > QuizQuestions.questions.length - 1) {
-      return console.log('finished quiz! go to success screen!');
+    if (currentIndex >= QuizQuestions.questions.length - 1) {
+      return router.push({ pathname: '/quiz/result', params: { success: 'true' } });
     }
+
+    scrollTo(currentIndex + 1);
   }
 
   return (
@@ -69,9 +71,7 @@ export default function Quiz() {
           data={QuizQuestions.questions}
           renderItem={({ item, index }) => {
             return <QuizSection question={item} onCTAPressed={(index: number) => {
-              console.log(`onCTAPressed: ${index}`);
               selectAnswer(index)
-              scrollTo(currentIndex + 1);
             }} />
           }}
           keyExtractor={(item) => item.question}
