@@ -1,5 +1,11 @@
 import { QuizQuestion } from "@/types/QuizQuestion";
 
+export const indexOfSelectedAnswer = (question: QuizQuestion): number => {
+  const index = question.options.findIndex((item) => item.value == question.selectedAnswer);
+  if (index !== -1) return index;
+  return -1;
+}
+
 type QuizState = {
   questions: QuizQuestion[],
 }

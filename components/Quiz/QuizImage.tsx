@@ -4,6 +4,7 @@ import { Image, TouchableHighlight, StyleSheet } from "react-native";
 export const QuizImage = ({ display, selected, onPress }: { display: string, selected: boolean, onPress: CallableFunction }) => {
   return (
     <TouchableHighlight
+      underlayColor='000'
       onPress={() => onPress()}>
       <Image
         style={[styles.image, selected == true ? styles.selected : null]}
