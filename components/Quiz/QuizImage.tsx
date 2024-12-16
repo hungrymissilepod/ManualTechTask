@@ -1,10 +1,10 @@
 import { Colors } from "@/constants/Colors";
 import { Image, TouchableHighlight, StyleSheet } from "react-native";
 
-export const QuizImage = ({ display, selected, callback }: { display: string, selected: boolean, callback: CallableFunction }) => {
+export const QuizImage = ({ display, selected, onPress }: { display: string, selected: boolean, onPress: CallableFunction }) => {
   return (
     <TouchableHighlight
-      onPress={() => callback()}>
+      onPress={() => onPress()}>
       <Image
         style={[styles.image, selected == true ? styles.selected : null]}
         source={{ uri: display }}

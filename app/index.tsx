@@ -8,9 +8,11 @@ import { Sizes } from '@/constants/Sizes';
 
 /*
 TODOS:
+- Create QuizSuccess screen
+- Create QuizFailure screen
+- Use reducers to track users progress during the quiz
 - Test to make sure 404 page works
 - Use localisation for strings rather than harcoding them?
-- Create quiz layout and quiz[id] screen. Navigate to new screen for each question
 - App name
 - App icon
 - Launch icon

@@ -1,40 +1,22 @@
 import { QuizQuestion } from "@/types/QuizQuestion";
-import { StyleSheet, Image, Text, View, useWindowDimensions, FlatList, TouchableHighlight } from "react-native";
+import { StyleSheet, Image, Text, View, useWindowDimensions } from "react-native";
 import { ThemedText } from "../ThemedText";
-import { useState } from "react";
 import { Colors } from "@/constants/Colors";
-import { QuizImage } from "./QuizImage";
 import { QuestionTypeImage, QuestionTypeText } from "@/constants/QuestionType";
 import { Sizes } from "@/constants/Sizes";
+import QuizImageType from "./QuizImageType";
 
-export const QuizSection = ({ question }: { question: QuizQuestion }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const QuizSection = ({ question, onCTAPressed }: { question: QuizQuestion, onCTAPressed: CallableFunction }) => {
   const { width } = useWindowDimensions();
-
-  const onTap = (index: number) => {
-    setCurrentIndex(index);
-  };
 
   const questionType = (question: QuizQuestion) => {
     if (question.type == QuestionTypeImage) {
-      return imageType(question);
+      return <QuizImageType question={question} onCTAPressed={onCTAPressed} />
     } else if (question.type == QuestionTypeText) {
       return textType(question);
     }
     return null;
   }
-
-  const imageType = (question: QuizQuestion) => {
-    return (
-      <FlatList
-        data={question.options}
-        renderItem={(item) => <QuizImage display={item.item.display} selected={currentIndex == item.index} callback={() => { onTap(item.index); }} />}
-        keyExtractor={(item) => item.value.toString()}
-        numColumns={3}
-        removeClippedSubviews={true}
-      />
-    );
-  };
 
   const textType = (question: QuizQuestion) => {
     return (
