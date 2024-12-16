@@ -19,7 +19,7 @@ export const QuizSection = ({ question, onCTAPressed }: { question: QuizQuestion
   }
 
   return (
-    <View style={{ width, alignItems: 'center' }}>
+    <View style={{ width, alignItems: 'center', }}>
       <ThemedText type="title" style={styles.title}>{question.question}</ThemedText>
       {questionType(question)}
     </View>
@@ -29,6 +29,8 @@ export const QuizSection = ({ question, onCTAPressed }: { question: QuizQuestion
 const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
+    justifyContent: 'center',
     paddingHorizontal: Sizes.paddingHorizontal,
+    paddingBottom: 40.
   },
 });

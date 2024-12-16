@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textTransform: 'capitalize',
     alignSelf: 'center',
+    paddingBottom: 0,
   },
   selected: {
     backgroundColor: Colors.tertiary,

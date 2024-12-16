@@ -27,9 +27,10 @@ export default function QuizImageType({ question, onCTAPressed }: { question: Qu
         keyExtractor={(item) => item.value.toString()}
         numColumns={3}
         removeClippedSubviews={true}
+        scrollEnabled={false}
       />
 
-      <View style={[styles.button, currentIndex == -1 ? styles.disabledButton : null, { width }]}>
+      <View style={[styles.button, currentIndex == -1 ? styles.disabledButton : null, { width, justifyContent: 'flex-end' }]}>
         <PrimaryButton
           type='primary'
           children={<Text>NEXT</Text>}

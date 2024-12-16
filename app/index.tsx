@@ -17,7 +17,7 @@ export default function App() {
   return (
     <View style={styles.background}>
       <StatusBar backgroundColor={Colors.tertiary} />
-      <View style={[styles.container, { justifyContent: 'center' }]} >
+      <View style={[styles.container, { paddingTop: 20, justifyContent: 'center' }]} >
         <Image width={170} height={170} source={require('../assets/images/manual-logo.png')} />
       </View>
 

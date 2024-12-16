@@ -74,9 +74,9 @@ export default function Quiz() {
         }}
       />
 
-      <SafeAreaView style={{ flex: 0.3 }}></SafeAreaView>
+      <View style={{ flex: 0.2 }}></View>
 
-      <View style={{ flex: 1 }}>
+      <View style={{ flexDirection: 'column', flex: 1 }} >
         <FlatList
           data={QuizQuestions.questions}
           renderItem={({ item, index }) => {
@@ -92,7 +92,7 @@ export default function Quiz() {
           ref={scrollRef}
         />
       </View>
-    </View>
+    </View >
   );
 }
 
